@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Philharmonia Orchestra</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D19A;
+    --cream: #F5F0E8;
+    --black: #0D0D0D;
+    --dark: #1A1610;
+    --mid: #2E2820;
+    --text-muted: #9A8E7A;
+    --red-accent: #8B1A1A;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); opacity: 0.5; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: linear-gradient(to bottom, rgba(13,13,13,0.97), transparent);
+    transition: background 0.4s;
+  }
+  nav.scrolled { background: rgba(13,13,13,0.98); border-bottom: 1px solid rgba(201,168,76,0.1); }
+  .nav-logo { font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; line-height: 1.4; cursor: pointer; }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a { color: var(--cream); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.3s, color 0.3s; }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .nav-cta { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 0.55rem 1.5rem; font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+  .nav-cta:hover { background: var(--gold); color: var(--black); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 24px; height: 1px; background: var(--gold); display: block; transition: all 0.3s; }
+
+  /* HERO */
+  .hero {
+    position: relative; height: 100vh; min-height: 700px; display: flex; align-items: center;
+    background: var(--black); overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 25% 55%, #2A1F0A 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 15%, #1A0808 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 80%, #0D1A15 0%, transparent 50%);
+  }
+  .hero-vline {
+    position: absolute; left: 55%; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.2) 30%, rgba(201,168,76,0.2) 70%, transparent);
+  }
+  .staff-svg {
+    position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+    width: 52%; opacity: 0.05;
+  }
+  .hero-content { position: relative; z-index: 1; padding: 0 4rem; max-width: 680px; }
+  .hero-overline {
+    font-size: 0.7rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.75rem; display: flex; align-items: center; gap: 1rem;
+    opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
+  }
+  .hero-overline::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(3.2rem, 7.5vw, 6.2rem);
+    font-weight: 300; line-height: 1; letter-spacing: -0.01em; margin-bottom: 0.4rem;
+    opacity: 0; animation: fadeUp 0.8s 0.4s ease forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-subtitle {
+    font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: var(--text-muted);
+    margin-bottom: 2rem; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.7s 0.55s ease forwards;
+  }
+  .hero-desc {
+    font-size: 0.95rem; line-height: 1.9; color: rgba(245,240,232,0.6); max-width: 420px; margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.7s 0.7s ease forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.9s ease forwards;
+  }
+  .btn-primary { background: var(--gold); color: var(--black); border: none; padding: 1rem 2.5rem; font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: all 0.3s; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--cream); border: none; padding: 1rem 0; font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; opacity: 0.65; display: flex; align-items: center; gap: 0.75rem; transition: opacity 0.3s; }
+  .btn-ghost:hover { opacity: 1; }
+  .btn-ghost::after { content: '→'; font-size: 1.1rem; transition: transform 0.3s; }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+  .hero-scroll { position: absolute; bottom: 2.5rem; left: 4rem; z-index: 1; display: flex; align-items: center; gap: 1rem; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); animation: fadeUp 0.7s 1.1s ease forwards; opacity: 0; }
+  .scroll-line { width: 50px; height: 1px; background: var(--text-muted); animation: expandLine 1.5s 1.5s ease forwards; transform-origin: left; transform: scaleX(0); }
+  @keyframes expandLine { to { transform: scaleX(1); } }
+
+  /* SEASON BANNER */
+  .season-banner { background: var(--gold); padding: 0.9rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .season-banner-left { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--black); text-transform: uppercase; }
+  .season-banner-mid { font-size: 0.78rem; color: rgba(13,13,13,0.65); }
+  .banner-link { background: var(--black); color: var(--gold); border: none; padding: 0.45rem 1.2rem; font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: opacity 0.3s; white-space: nowrap; }
+  .banner-link:hover { opacity: 0.8; }
+
+  /* SECTION COMMONS */
+  section { padding: 6rem 4rem; }
+  .section-label { font-size: 0.67rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::after { content: ''; flex: 1; max-width: 120px; height: 1px; background: rgba(201,168,76,0.3); }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.15; }
+  .view-all { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); cursor: pointer; border: none; background: none; display: flex; align-items: center; gap: 0.75rem; transition: gap 0.3s; opacity: 0.8; }
+  .view-all:hover { opacity: 1; gap: 1.1rem; }
+  .view-all::after { content: '→'; }
+
+  /* CONCERTS */
+  .concerts { background: var(--dark); }
+  .concerts-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
+  .concerts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(201,168,76,0.08); }
+  .concert-card {
+    background: var(--dark); padding: 2.5rem; display: grid;
+    grid-template-columns: 80px 1fr auto; gap: 2rem; align-items: start;
+    transition: background 0.3s; cursor: pointer; position: relative;
+  }
+  .concert-card::after { content: ''; position: absolute; bottom: 0; left: 2.5rem; right: 2.5rem; height: 1px; background: rgba(201,168,76,0.08); }
+  .concert-card:hover { background: rgba(201,168,76,0.04); }
+  .featured-card { background: var(--mid); }
+  .featured-card:hover { background: rgba(201,168,76,0.07); }
+  .concert-date { text-align: center; border-right: 1px solid rgba(201,168,76,0.15); padding-right: 2rem; }
+  .date-day { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--gold); line-height: 1; }
+  .date-month { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.3rem; }
+  .concert-tag { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.7rem; opacity: 0.85; }
+  .concert-title { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 400; line-height: 1.25; margin-bottom: 0.8rem; }
+  .concert-title em { font-style: italic; color: var(--gold-light); }
+  .concert-meta { font-size: 0.78rem; color: var(--text-muted); line-height: 1.9; }
+  .concert-meta strong { color: rgba(245,240,232,0.85); font-weight: 400; }
+  .concert-action { align-self: center; }
+  .ticket-btn { background: transparent; border: 1px solid rgba(201,168,76,0.35); color: var(--gold); padding: 0.7rem 1.4rem; font-family: 'Jost', sans-serif; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: all 0.3s; }
+  .ticket-btn:hover, .ticket-btn.featured { background: var(--gold); color: var(--black); border-color: var(--gold); }
+
+  /* STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(201,168,76,0.08); margin-top: 1px; }
+  .stat-item { background: var(--black); padding: 2.5rem 2rem; text-align: center; }
+  .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.5rem; }
+
+  /* ABOUT */
+  .about { background: var(--black); }
+  .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .about-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-style: italic; font-weight: 300; line-height: 1.55; color: var(--gold-light); margin-bottom: 2rem; position: relative; padding-left: 2rem; }
+  .about-quote::before { content: ''; position: absolute; left: 0; top: 0.3em; bottom: 0.3em; width: 2px; background: var(--gold); opacity: 0.5; }
+  .about-text { font-size: 0.9rem; color: rgba(245,240,232,0.62); line-height: 2; }
+  .about-right { }
+  .pillar { border-left: 1px solid rgba(201,168,76,0.2); padding: 1.5rem 2rem; margin-bottom: 1.5rem; transition: border-color 0.3s; }
+  .pillar:hover { border-color: rgba(201,168,76,0.5); }
+  .pillar-title { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.5rem; }
+  .pillar-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.8; }
+
+  /* BOOKING */
+  .booking { background: var(--dark); }
+  .booking-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  .form-box { border: 1px solid rgba(201,168,76,0.15); padding: 3rem; }
+  .form-box-title { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 2.5rem; text-transform: uppercase; }
+  .form-group { margin-bottom: 1.75rem; }
+  .form-group label { display: block; font-size: 0.67rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.7rem; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(201,168,76,0.2);
+    color: var(--cream); font-family: 'Jost', sans-serif; font-size: 0.92rem; font-weight: 300;
+    padding: 0.7rem 0; outline: none; transition: border-color 0.3s;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(245,240,232,0.22); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-group select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C9A84C'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.5rem center; }
+  .form-group select option { background: #1A1610; color: var(--cream); }
+  .form-group textarea { resize: none; height: 90px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .form-submit { width: 100%; background: var(--gold); color: var(--black); border: none; padding: 1.1rem; font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: background 0.3s; margin-top: 0.5rem; }
+  .form-submit:hover { background: var(--gold-light); }
+  .form-note { font-size: 0.68rem; color: var(--text-muted); text-align: center; margin-top: 1rem; line-height: 1.7; }
+  .venue-card { border: 1px solid rgba(201,168,76,0.12); padding: 2rem; margin-bottom: 1.5rem; position: relative; transition: border-color 0.3s; }
+  .venue-card:hover { border-color: rgba(201,168,76,0.3); }
+  .venue-diamond { position: absolute; top: -0.55rem; left: 1.8rem; background: var(--dark); padding: 0 0.5rem; color: var(--gold); font-size: 0.6rem; }
+  .venue-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 0.4rem; }
+  .venue-address { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem; }
+  .venue-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; border-top: 1px solid rgba(201,168,76,0.08); padding-top: 1.25rem; }
+  .venue-detail .vd-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem; }
+  .venue-detail .vd-value { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--gold); }
+
+  /* ENSEMBLE */
+  .ensemble { background: var(--black); }
+  .ensemble-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(201,168,76,0.06); margin-top: 3rem; }
+  .member-card { background: var(--black); padding: 2rem 1.5rem; text-align: center; transition: background 0.3s; cursor: pointer; }
+  .member-card:hover { background: var(--dark); }
+  .member-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--mid); margin: 0 auto 1.25rem; border: 1px solid rgba(201,168,76,0.2); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--gold); transition: border-color 0.3s; }
+  .member-card:hover .member-avatar { border-color: rgba(201,168,76,0.6); }
+  .member-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; margin-bottom: 0.3rem; }
+  .member-role { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+  .member-instrument { font-size: 0.75rem; color: var(--gold); opacity: 0.7; font-style: italic; font-family: 'Cormorant Garamond', serif; }
+
+  /* EDUCATION */
+  .education { background: var(--mid); }
+  .education-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(201,168,76,0.06); margin-top: 3rem; }
+  .edu-card { background: var(--mid); padding: 2.5rem; transition: background 0.3s; }
+  .edu-card:hover { background: var(--dark); }
+  .edu-icon { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); margin-bottom: 1.25rem; opacity: 0.7; }
+  .edu-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 0.75rem; }
+  .edu-text { font-size: 0.8rem; color: var(--text-muted); line-height: 1.85; }
+
+  /* FOOTER */
+  footer { background: var(--dark); padding: 4rem; border-top: 1px solid rgba(201,168,76,0.12); }
+  .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+  .footer-logo { font-family: 'Cinzel', serif; font-size: 1.1rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1rem; }
+  .footer-brand p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.85; max-width: 230px; margin-bottom: 1.5rem; }
+  .social-links { display: flex; gap: 1rem; }
+  .social-link { width: 32px; height: 32px; border: 1px solid rgba(201,168,76,0.25); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.7rem; cursor: pointer; transition: all 0.3s; text-decoration: none; }
+  .social-link:hover { background: var(--gold); color: var(--black); }
+  .footer-col h4 { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+  .footer-col a { display: block; color: var(--text-muted); text-decoration: none; font-size: 0.8rem; line-height: 2.1; transition: color 0.3s; }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom { border-top: 1px solid rgba(201,168,76,0.08); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.7rem; color: var(--text-muted); }
+  .footer-contact { font-size: 0.75rem; color: var(--text-muted); }
+  .footer-contact a { color: var(--gold); text-decoration: none; opacity: 0.8; }
+  .footer-contact a:hover { opacity: 1; }
+  .ornament { color: var(--gold); opacity: 0.4; margin: 0 0.5rem; }
+
+  /* SUCCESS MESSAGE */
+  .success-msg { display: none; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.3); padding: 1.5rem; text-align: center; margin-top: 1rem; }
+  .success-msg p { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold-light); }
+  .success-msg small { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    nav { padding: 1.25rem 2rem; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 4rem 2rem; }
+    .hero-content { padding: 0 2rem; }
+    .hero-scroll { left: 2rem; }
+    .season-banner { padding: 0.9rem 2rem; }
+    .concerts-grid { grid-template-columns: 1fr; }
+    .concert-card { grid-template-columns: 70px 1fr; }
+    .concert-action { grid-column: 2; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .booking-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .ensemble-grid { grid-template-columns: repeat(2, 1fr); }
+    .education-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .footer-brand { grid-column: 1 / -1; }
+    .hero-vline { display: none; }
+  }
+  @media (max-width: 600px) {
+    .hero-title { font-size: 2.8rem; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .ensemble-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-inner { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .season-banner { flex-direction: column; gap: 0.5rem; }
+  }
+
+  /* MOBILE NAV MENU */
+  .mobile-nav { display: none; position: fixed; inset: 0; background: rgba(13,13,13,0.98); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 0.2em; color: var(--cream); text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
+  .mobile-nav a:hover { color: var(--gold); }
+  .mobile-nav-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  <a href="#concerts" onclick="closeMobileNav()">Concerts</a>
+  <a href="#booking" onclick="closeMobileNav()">Book</a>
+  <a href="#ensemble" onclick="closeMobileNav()">Ensemble</a>
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#education" onclick="closeMobileNav()">Education</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">Philharmonia<br>Orchestra</div>
+  <div class="nav-links">
+    <a href="#concerts">Concerts</a>
+    <a href="#booking">Book</a>
+    <a href="#ensemble">Ensemble</a>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Season Tickets</button>
+  <div class="hamburger" onclick="document.getElementById('mobileNav').classList.add('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-vline"></div>
+  <svg class="staff-svg" viewBox="0 0 700 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="70" x2="700" y2="70" stroke="#C9A84C" stroke-width="1"/>
+    <line x1="0" y1="110" x2="700" y2="110" stroke="#C9A84C" stroke-width="1"/>
+    <line x1="0" y1="150" x2="700" y2="150" stroke="#C9A84C" stroke-width="1"/>
+    <line x1="0" y1="190" x2="700" y2="190" stroke="#C9A84C" stroke-width="1"/>
+    <line x1="0" y1="230" x2="700" y2="230" stroke="#C9A84C" stroke-width="1"/>
+    <ellipse cx="90" cy="230" rx="20" ry="13" fill="#C9A84C" opacity="0.7"/>
+    <line x1="110" y1="110" x2="110" y2="230" stroke="#C9A84C" stroke-width="1.5" opacity="0.7"/>
+    <ellipse cx="200" cy="190" rx="20" ry="13" fill="#C9A84C" opacity="0.6"/>
+    <line x1="220" y1="70" x2="220" y2="190" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+    <ellipse cx="310" cy="150" rx="20" ry="13" fill="#C9A84C" opacity="0.45"/>
+    <line x1="330" y1="70" x2="330" y2="150" stroke="#C9A84C" stroke-width="1.5" opacity="0.45"/>
+    <ellipse cx="400" cy="110" rx="20" ry="13" fill="#C9A84C" opacity="0.3"/>
+    <line x1="420" y1="70" x2="420" y2="110" stroke="#C9A84C" stroke-width="1.5" opacity="0.3"/>
+    <ellipse cx="490" cy="150" rx="20" ry="13" fill="#C9A84C" opacity="0.2"/>
+    <line x1="510" y1="70" x2="510" y2="150" stroke="#C9A84C" stroke-width="1.5" opacity="0.2"/>
+    <ellipse cx="600" cy="190" rx="20" ry="13" fill="#C9A84C" opacity="0.12"/>
+    <line x1="620" y1="70" x2="620" y2="190" stroke="#C9A84C" stroke-width="1.5" opacity="0.12"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-overline">Season 2025 – 2026</div>
+    <h1 class="hero-title">Where Music<br><em>Transcends</em></h1>
+    <p class="hero-subtitle">Philharmonia Orchestra · Est. 1947</p>
+    <p class="hero-desc">World-class symphonic performances bringing the greatest orchestral works to life. Join us for an unforgettable season of Beethoven, Brahms, and beyond.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('concerts').scrollIntoView({behavior:'smooth'})">Explore Concerts</button>
+      <button class="btn-ghost" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book a Performance</button>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div> Scroll to discover</div>
+</section>
+
+<!-- SEASON BANNER -->
+<div class="season-banner">
+  <div class="season-banner-left">2025–2026 Season · Now on Sale</div>
+  <div class="season-banner-mid">Early booking discount: 20% off select performances through 30 April</div>
+  <button class="banner-link" onclick="document.getElementById('concerts').scrollIntoView({behavior:'smooth'})">View All Dates →</button>
+</div>
+
+<!-- CONCERTS -->
+<section class="concerts" id="concerts">
+  <div class="concerts-header">
+    <div>
+      <div class="section-label">Upcoming Performances</div>
+      <h2 class="section-title">This Season's<br>Programme</h2>
+    </div>
+    <button class="view-all">Full Calendar</button>
+  </div>
+  <div class="concerts-grid">
+    <!-- Card 1 -->
+    <div class="concert-card featured-card">
+      <div class="concert-date"><div class="date-day">12</div><div class="date-month">Apr</div></div>
+      <div class="concert-info">
+        <div class="concert-tag">♦ Gala Opening Night</div>
+        <div class="concert-title">Beethoven's <em>Ninth Symphony</em></div>
+        <div class="concert-meta">
+          <strong>Conductor:</strong> Maestro Arjun Krishnamurthy<br>
+          <strong>Venue:</strong> National Centre for the Performing Arts<br>
+          <strong>Time:</strong> 7:30 PM &nbsp;·&nbsp; Duration: 2h 20min (incl. interval)
+        </div>
+      </div>
+      <div class="concert-action"><button class="ticket-btn featured" onclick="selectPerformance('12 Apr — Beethoven\'s Ninth Symphony (Opening Night)')">Book Tickets</button></div>
+    </div>
+    <!-- Card 2 -->
+    <div class="concert-card">
+      <div class="concert-date"><div class="date-day">28</div><div class="date-month">Apr</div></div>
+      <div class="concert-info">
+        <div class="concert-tag">Chamber Series</div>
+        <div class="concert-title">Brahms <em>Double Concerto</em></div>
+        <div class="concert-meta">
+          <strong>Soloists:</strong> Priya Menon (violin), Rohan Das (cello)<br>
+          <strong>Venue:</strong> Bangalore International Centre<br>
+          <strong>Time:</strong> 6:30 PM &nbsp;·&nbsp; Duration: 1h 45min
+        </div>
+      </div>
+      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('28 Apr — Brahms Double Concerto')">Book Tickets</button></div>
+    </div>
+    <!-- Card 3 -->
+    <div class="concert-card">
+      <div class="concert-date"><div class="date-day">10</div><div class="date-month">May</div></div>
+      <div class="concert-info">
+        <div class="concert-tag">Piano Series</div>
+        <div class="concert-title">Rachmaninoff <em>Piano Concerto No. 2</em></div>
+        <div class="concert-meta">
+          <strong>Soloist:</strong> Elena Volkova (Piano)<br>
+          <strong>Venue:</strong> Chowdaiah Memorial Hall, Bangalore<br>
+          <strong>Time:</strong> 7:00 PM &nbsp;·&nbsp; Duration: 2h
+        </div>
+      </div>
+      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('10 May — Rachmaninoff Piano Concerto No. 2')">Book Tickets</button></div>
+    </div>
+    <!-- Card 4 -->
+    <div class="concert-card">
+      <div class="concert-date"><div class="date-day">24</div><div class="date-month">May</div></div>
+      <div class="concert-info">
+        <div class="concert-tag">Youth Gala</div>
+        <div class="concert-title">Holst: <em>The Planets Suite</em></div>
+        <div class="concert-meta">
+          <strong>Conductor:</strong> Maestro Arjun Krishnamurthy<br>
+          <strong>Venue:</strong> National Centre for the Performing Arts<br>
+          <strong>Time:</strong> 5:00 PM & 8:00 PM
+        </div>
+      </div>
+      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('24 May — Holst: The Planets Suite')">Book Tickets</button></div>
+    </div>
+    <!-- Card 5 -->
+    <div class="concert-card">
+      <div class="concert-date"><div class="date-day">14</div><div class="date-month">Jun</div></div>
+      <div class="concert-info">
+        <div class="concert-tag">International Guest</div>
+        <div class="concert-title">Mahler <em>Symphony No. 5</em></div>
+        <div class="concert-meta">
+          <strong>Conductor:</strong> Guest Maestro Stefan Dohr<br>
+          <strong>Venue:</strong> National Centre for the Performing Arts<br>
+          <strong>Time:</strong> 7:30 PM &nbsp;·&nbsp; Duration: 2h 15min
+        </div>
+      </div>
+      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('14 Jun — Mahler Symphony No. 5')">Book Tickets</button></div>
+    </div>
+    <!-- Card 6 -->
+    <div class="concert-card">
+      <div class="concert-date"><div class="date-day">05</div><div class="date-month">Jul</div></div>
+      <div class="concert-info">
+        <div class="concert-tag">Season Finale</div>
+        <div class="concert-title">Dvořák <em>New World Symphony</em></div>
+        <div class="concert-meta">
+          <strong>Conductor:</strong> Maestro Arjun Krishnamurthy<br>
+          <strong>Venue:</strong> Chowdaiah Memorial Hall, Bangalore<br>
+          <strong>Time:</strong> 7:00 PM &nbsp;·&nbsp; Duration: 1h 50min
+        </div>
+      </div>
+      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('05 Jul — Dvořák New World Symphony')">Book Tickets</button></div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-number">78</div><div class="stat-label">Years of Excellence</div></div>
+    <div class="stat-item"><div class="stat-number">120</div><div class="stat-label">Musicians</div></div>
+    <div class="stat-item"><div class="stat-number">42</div><div class="stat-label">Performances Per Season</div></div>
+    <div class="stat-item"><div class="stat-number">15K+</div><div class="stat-label">Annual Audience Members</div></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <div class="booking-left">
+      <div class="section-label">Reserve Your Seats</div>
+      <h2 class="section-title">Book a<br>Performance</h2>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.95;margin-top:1.5rem;margin-bottom:3rem;">Secure your place at one of our upcoming concerts. Private boxes, group bookings, and corporate packages available upon request. Our box office team will confirm availability within 24 hours.</p>
+      <div class="venue-card">
+        <div class="venue-diamond">♦</div>
+        <div class="venue-name">National Centre for the Performing Arts</div>
+        <div class="venue-address">Nariman Point, Mumbai — Main Concert Hall<br>Also serving Bangalore & Delhi venues</div>
+        <div class="venue-details">
+          <div class="venue-detail"><div class="vd-label">Capacity</div><div class="vd-value">2,400</div></div>
+          <div class="venue-detail"><div class="vd-label">Boxes</div><div class="vd-value">12</div></div>
+          <div class="venue-detail"><div class="vd-label">Parking</div><div class="vd-value">Yes</div></div>
+        </div>
+      </div>
+      <div class="venue-card">
+        <div class="venue-diamond">♦</div>
+        <div class="venue-name">Chowdaiah Memorial Hall</div>
+        <div class="venue-address">Vyalikaval, Bangalore — Chamber Venue</div>
+        <div class="venue-details">
+          <div class="venue-detail"><div class="vd-label">Capacity</div><div class="vd-value">1,200</div></div>
+          <div class="venue-detail"><div class="vd-label">Boxes</div><div class="vd-value">6</div></div>
+          <div class="venue-detail"><div class="vd-label">Parking</div><div class="vd-value">Yes</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="booking-right">
+      <div class="form-box">
+        <div class="form-box-title">Reservation Enquiry</div>
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="Arjun" id="fname"></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Sharma" id="lname"></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" id="email"></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 98765 43210" id="phone"></div>
+        <div class="form-group">
+          <label>Select Performance</label>
+          <select id="perfSelect">
+            <option value="">Choose a concert</option>
+            <option>12 Apr — Beethoven's Ninth Symphony (Opening Night)</option>
+            <option>28 Apr — Brahms Double Concerto</option>
+            <option>10 May — Rachmaninoff Piano Concerto No. 2</option>
+            <option>24 May — Holst: The Planets Suite</option>
+            <option>14 Jun — Mahler Symphony No. 5</option>
+            <option>05 Jul — Dvořák New World Symphony</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ticket Category</label>
+            <select>
+              <option>Premium (Stalls) — ₹3,500</option>
+              <option>Standard — ₹2,000</option>
+              <option>Circle — ₹1,500</option>
+              <option>Private Box — ₹18,000</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Number of Tickets</label><input type="number" placeholder="2" min="1" max="20" id="numTickets"></div>
+        </div>
+        <div class="form-group"><label>Special Requirements</label><textarea placeholder="Accessibility needs, group bookings, corporate enquiries..."></textarea></div>
+        <button class="form-submit" onclick="submitForm()">Confirm Reservation</button>
+        <div class="success-msg" id="successMsg">
+          <p>✦ Your reservation has been received</p>
+          <small>Our box office team will contact you within 24 hours to confirm availability and process payment.</small>
+        </div>
+        <p class="form-note">Our team will confirm availability within 24 hours.<br>Secure payment processed upon confirmation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-left">
+      <div class="section-label">Our Heritage</div>
+      <h2 class="section-title">A Legacy of<br>Musical Excellence</h2>
+      <div class="about-quote" style="margin-top:2rem;">"Music is the shorthand of emotion — and we dedicate our craft to expressing what words cannot."</div>
+      <p class="about-text">Founded in 1947, the Philharmonia Orchestra has been at the forefront of India's classical music landscape for nearly eight decades. From our earliest performances at Kolkata's Grand Hall to our residency at the National Centre for the Performing Arts, we have remained committed to presenting the world's great orchestral repertoire with uncompromising artistic excellence.<br><br>Our 120 musicians — drawn from India and across the globe — form an ensemble of rare distinction, under the direction of Music Director Maestro Arjun Krishnamurthy.</p>
+    </div>
+    <div class="about-right">
+      <div class="pillar">
+        <div class="pillar-title">♦ Artistic Excellence</div>
+        <div class="pillar-text">We hold ourselves to the highest international standards, performing the full breadth of the orchestral canon with passion, precision, and profound musical insight.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">♦ Community & Access</div>
+        <div class="pillar-text">Through subsidised tickets, youth programmes, and free community concerts, we believe world-class orchestral music belongs to everyone.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">♦ Musical Education</div>
+        <div class="pillar-text">Our academy nurtures the next generation of Indian orchestral musicians through masterclasses, youth orchestras, and scholarship programmes.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">♦ Indian Premieres</div>
+        <div class="pillar-text">We champion new works by Indian composers and regularly programme Indian premieres of major international compositions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENSEMBLE -->
+<section class="ensemble" id="ensemble">
+  <div class="section-label">Meet the Artists</div>
+  <h2 class="section-title">Principal Musicians</h2>
+  <div class="ensemble-grid">
+    <div class="member-card"><div class="member-avatar">AK</div><div class="member-name">Arjun Krishnamurthy</div><div class="member-role">Music Director</div><div class="member-instrument">Principal Conductor</div></div>
+    <div class="member-card"><div class="member-avatar">PM</div><div class="member-name">Priya Menon</div><div class="member-role">Concertmaster</div><div class="member-instrument">Violin</div></div>
+    <div class="member-card"><div class="member-avatar">RD</div><div class="member-name">Rohan Das</div><div class="member-role">Principal</div><div class="member-instrument">Cello</div></div>
+    <div class="member-card"><div class="member-avatar">SN</div><div class="member-name">Sunita Nair</div><div class="member-role">Principal</div><div class="member-instrument">Oboe</div></div>
+    <div class="member-card"><div class="member-avatar">VK</div><div class="member-name">Vikram Kaul</div><div class="member-role">Principal</div><div class="member-instrument">French Horn</div></div>
+    <div class="member-card"><div class="member-avatar">AA</div><div class="member-name">Ananya Agarwal</div><div class="member-role">Principal</div><div class="member-instrument">Flute</div></div>
+    <div class="member-card"><div class="member-avatar">MR</div><div class="member-name">Mihail Rusu</div><div class="member-role">Principal</div><div class="member-instrument">Trumpet</div></div>
+    <div class="member-card"><div class="member-avatar">LK</div><div class="member-name">Laleh Khalili</div><div class="member-role">Principal</div><div class="member-instrument">Harp</div></div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education" id="education">
+  <div class="section-label">Learning & Outreach</div>
+  <h2 class="section-title">Music Education<br>& Academy</h2>
+  <div class="education-grid">
+    <div class="edu-card">
+      <div class="edu-icon">♩</div>
+      <div class="edu-title">Youth Orchestra</div>
+      <div class="edu-text">Our flagship youth programme for musicians aged 12–22. Full orchestral training, sectionals, and public performances under professional conductors. Auditions held annually each September.</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">♪</div>
+      <div class="edu-title">Masterclasses</div>
+      <div class="edu-text">Intensive masterclasses led by our principal musicians and distinguished international soloists. Open to advanced students and emerging professionals across all orchestral instruments.</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">♫</div>
+      <div class="edu-title">School Concerts</div>
+      <div class="edu-text">Specially designed educational concerts bringing live orchestral music to schools across Karnataka and Maharashtra. Curriculum-linked programmes for students aged 6–18.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Philharmonia Orchestra</div>
+      <p>Bringing the world's greatest symphonic music to audiences across India. An institution of cultural excellence since 1947.</p>
+      <div class="social-links">
+        <a class="social-link" href="#" title="Facebook">f</a>
+        <a class="social-link" href="#" title="Instagram">in</a>
+        <a class="social-link" href="#" title="YouTube">▶</a>
+        <a class="social-link" href="#" title="Spotify">♪</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Performances</h4>
+      <a href="#concerts">2025–26 Season</a>
+      <a href="#concerts">Symphonic Series</a>
+      <a href="#concerts">Chamber Music</a>
+      <a href="#concerts">Youth Concerts</a>
+      <a href="#concerts">Special Events</a>
+    </div>
+    <div class="footer-col">
+      <h4>The Orchestra</h4>
+      <a href="#about">About Us</a>
+      <a href="#ensemble">Our Musicians</a>
+      <a href="#about">Music Director</a>
+      <a href="#education">Education</a>
+      <a href="#">Press & Media</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="#booking">Box Office</a>
+      <a href="#booking">Group Bookings</a>
+      <a href="#booking">Corporate Packages</a>
+      <a href="#">Donate</a>
+      <a href="#">Careers</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Philharmonia Orchestra. All rights reserved.</span>
+    <div class="footer-contact">
+      Box Office: <a href="tel:+918045678900">+91 80 4567 8900</a>
+      <span class="ornament">·</span>
+      <a href="mailto:bookings@philharmonia.in">bookings@philharmonia.in</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('mainNav');
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile nav close
+  function closeMobileNav() {
+    document.getElementById('mobileNav').classList.remove('open');
+  }
+
+  // Select performance from concert card
+  function selectPerformance(perf) {
+    const sel = document.getElementById('perfSelect');
+    for (let i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].text.includes(perf.substring(0, 10))) {
+        sel.selectedIndex = i;
+        break;
+      }
+    }
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Form submission
+  function submitForm() {
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const perf = document.getElementById('perfSelect').value;
+    if (!fname || !email || !perf) {
+      alert('Please fill in your name, email, and select a performance.');
+      return;
+    }
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.form-submit').disabled = true;
+    document.querySelector('.form-submit').textContent = 'Reservation Received';
+    document.querySelector('.form-submit').style.background = 'rgba(201,168,76,0.3)';
+    document.querySelector('.form-submit').style.color = 'var(--gold)';
+    document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Intersection observer for subtle entrance animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.concert-card, .member-card, .pillar, .edu-card, .stat-item, .venue-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
