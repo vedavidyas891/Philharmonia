@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Philharmonia Orchestra</title>
+<title>Bangalore City Chamber Orchestra | BCCO</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -198,10 +198,19 @@
   .member-role { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
   .member-instrument { font-size: 0.75rem; color: var(--gold); opacity: 0.7; font-style: italic; font-family: 'Cormorant Garamond', serif; }
 
+  /* TESTIMONIALS */
+  .testimonials { background: var(--mid); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: rgba(201,168,76,0.06); margin-top: 3rem; }
+  .testimonial-card { background: var(--mid); padding: 2.5rem; transition: background 0.3s; }
+  .testimonial-card:hover { background: var(--dark); }
+  .testimonial-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; font-weight: 300; line-height: 1.75; color: rgba(245,240,232,0.82); margin-bottom: 1.5rem; position: relative; padding-top: 1.5rem; }
+  .testimonial-quote::before { content: '\201C'; position: absolute; top: -0.5rem; left: -0.25rem; font-size: 4rem; color: var(--gold); opacity: 0.25; font-style: normal; line-height: 1; }
+  .testimonial-author { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
+
   /* EDUCATION */
-  .education { background: var(--mid); }
+  .education { background: var(--black); }
   .education-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(201,168,76,0.06); margin-top: 3rem; }
-  .edu-card { background: var(--mid); padding: 2.5rem; transition: background 0.3s; }
+  .edu-card { background: var(--black); padding: 2.5rem; transition: background 0.3s; }
   .edu-card:hover { background: var(--dark); }
   .edu-icon { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); margin-bottom: 1.25rem; opacity: 0.7; }
   .edu-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 0.75rem; }
@@ -249,6 +258,7 @@
     .about-inner { grid-template-columns: 1fr; gap: 3rem; }
     .booking-inner { grid-template-columns: 1fr; gap: 3rem; }
     .ensemble-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: 1fr; }
     .education-grid { grid-template-columns: 1fr; }
     .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     .footer-brand { grid-column: 1 / -1; }
@@ -277,24 +287,24 @@
 <!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
   <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
-  <a href="#concerts" onclick="closeMobileNav()">Concerts</a>
-  <a href="#booking" onclick="closeMobileNav()">Book</a>
+  <a href="#concerts" onclick="closeMobileNav()">Seasons</a>
+  <a href="#booking" onclick="closeMobileNav()">Contact</a>
   <a href="#ensemble" onclick="closeMobileNav()">Ensemble</a>
   <a href="#about" onclick="closeMobileNav()">About</a>
-  <a href="#education" onclick="closeMobileNav()">Education</a>
+  <a href="#education" onclick="closeMobileNav()">PTMA</a>
 </div>
 
 <!-- NAV -->
 <nav id="mainNav">
-  <div class="nav-logo">Philharmonia<br>Orchestra</div>
+  <div class="nav-logo">Bangalore City<br>Chamber Orchestra</div>
   <div class="nav-links">
-    <a href="#concerts">Concerts</a>
-    <a href="#booking">Book</a>
+    <a href="#concerts">Seasons</a>
+    <a href="#booking">Contact</a>
     <a href="#ensemble">Ensemble</a>
     <a href="#about">About</a>
-    <a href="#education">Education</a>
+    <a href="#education">PTMA</a>
   </div>
-  <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Season Tickets</button>
+  <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
   <div class="hamburger" onclick="document.getElementById('mobileNav').classList.add('open')">
     <span></span><span></span><span></span>
   </div>
@@ -324,13 +334,13 @@
     <line x1="620" y1="70" x2="620" y2="190" stroke="#C9A84C" stroke-width="1.5" opacity="0.12"/>
   </svg>
   <div class="hero-content">
-    <div class="hero-overline">Season 2025 – 2026</div>
-    <h1 class="hero-title">Where Music<br><em>Transcends</em></h1>
-    <p class="hero-subtitle">Philharmonia Orchestra · Est. 1947</p>
-    <p class="hero-desc">World-class symphonic performances bringing the greatest orchestral works to life. Join us for an unforgettable season of Beethoven, Brahms, and beyond.</p>
+    <div class="hero-overline">Bangalore City Chamber Orchestra</div>
+    <h1 class="hero-title">Where Music<br><em>Comes Alive</em></h1>
+    <p class="hero-subtitle">BCCO · Est. 2018</p>
+    <p class="hero-desc">Discover the enchanting world of string instruments — where music comes alive and passion resonates. Dive deeper into the melodies of chamber music with Bangalore's premier orchestra.</p>
     <div class="hero-actions">
-      <button class="btn-primary" onclick="document.getElementById('concerts').scrollIntoView({behavior:'smooth'})">Explore Concerts</button>
-      <button class="btn-ghost" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book a Performance</button>
+      <button class="btn-primary" onclick="document.getElementById('concerts').scrollIntoView({behavior:'smooth'})">Our Seasons</button>
+      <button class="btn-ghost" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
     </div>
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div> Scroll to discover</div>
@@ -338,111 +348,111 @@
 
 <!-- SEASON BANNER -->
 <div class="season-banner">
-  <div class="season-banner-left">2025–2026 Season · Now on Sale</div>
-  <div class="season-banner-mid">Early booking discount: 20% off select performances through 30 April</div>
-  <button class="banner-link" onclick="document.getElementById('concerts').scrollIntoView({behavior:'smooth'})">View All Dates →</button>
+  <div class="season-banner-left">BCCO Season 2024 · Presented by PTMA</div>
+  <div class="season-banner-mid">Nestled in the Philomena Thumboochetty Music Academy, Bangalore</div>
+  <button class="banner-link" onclick="document.getElementById('concerts').scrollIntoView({behavior:'smooth'})">View Seasons →</button>
 </div>
 
 <!-- CONCERTS -->
 <section class="concerts" id="concerts">
   <div class="concerts-header">
     <div>
-      <div class="section-label">Upcoming Performances</div>
-      <h2 class="section-title">This Season's<br>Programme</h2>
+      <div class="section-label">Our Musical Journey</div>
+      <h2 class="section-title">Concert<br>Seasons</h2>
     </div>
-    <button class="view-all">Full Calendar</button>
+    <button class="view-all" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Enquire Now</button>
   </div>
   <div class="concerts-grid">
     <!-- Card 1 -->
     <div class="concert-card featured-card">
-      <div class="concert-date"><div class="date-day">12</div><div class="date-month">Apr</div></div>
+      <div class="concert-date"><div class="date-day">24</div><div class="date-month">2024</div></div>
       <div class="concert-info">
-        <div class="concert-tag">♦ Gala Opening Night</div>
-        <div class="concert-title">Beethoven's <em>Ninth Symphony</em></div>
+        <div class="concert-tag">♦ Latest Season</div>
+        <div class="concert-title">BCCO Season 2024 — <em>Presented by PTMA</em></div>
         <div class="concert-meta">
-          <strong>Conductor:</strong> Maestro Arjun Krishnamurthy<br>
-          <strong>Venue:</strong> National Centre for the Performing Arts<br>
-          <strong>Time:</strong> 7:30 PM &nbsp;·&nbsp; Duration: 2h 20min (incl. interval)
+          <strong>Presented by:</strong> The Philomena Thumboochetty Music Academy<br>
+          <strong>Venue:</strong> Bangalore, Karnataka<br>
+          <strong>Featuring:</strong> India's finest orchestral musicians
         </div>
       </div>
-      <div class="concert-action"><button class="ticket-btn featured" onclick="selectPerformance('12 Apr — Beethoven\'s Ninth Symphony (Opening Night)')">Book Tickets</button></div>
+      <div class="concert-action"><button class="ticket-btn featured" onclick="selectPerformance('BCCO Season 2024')">Enquire</button></div>
     </div>
     <!-- Card 2 -->
     <div class="concert-card">
-      <div class="concert-date"><div class="date-day">28</div><div class="date-month">Apr</div></div>
+      <div class="concert-date"><div class="date-day">19</div><div class="date-month">2019</div></div>
       <div class="concert-info">
         <div class="concert-tag">Chamber Series</div>
-        <div class="concert-title">Brahms <em>Double Concerto</em></div>
+        <div class="concert-title">BCCO Season 2019 — <em>Bangalore</em></div>
         <div class="concert-meta">
-          <strong>Soloists:</strong> Priya Menon (violin), Rohan Das (cello)<br>
-          <strong>Venue:</strong> Bangalore International Centre<br>
-          <strong>Time:</strong> 6:30 PM &nbsp;·&nbsp; Duration: 1h 45min
+          <strong>Venue:</strong> Bangalore, Karnataka<br>
+          <strong>Programme:</strong> String Quartet & Chamber Works<br>
+          <strong>Artists:</strong> India's top musical professionals
         </div>
       </div>
-      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('28 Apr — Brahms Double Concerto')">Book Tickets</button></div>
+      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('BCCO Season 2019 Bangalore')">Learn More</button></div>
     </div>
     <!-- Card 3 -->
     <div class="concert-card">
-      <div class="concert-date"><div class="date-day">10</div><div class="date-month">May</div></div>
+      <div class="concert-date"><div class="date-day">19</div><div class="date-month">2019</div></div>
       <div class="concert-info">
-        <div class="concert-tag">Piano Series</div>
-        <div class="concert-title">Rachmaninoff <em>Piano Concerto No. 2</em></div>
+        <div class="concert-tag">Tour Performance</div>
+        <div class="concert-title">BCCO Season 2019 — <em>Goa Tour</em></div>
         <div class="concert-meta">
-          <strong>Soloist:</strong> Elena Volkova (Piano)<br>
-          <strong>Venue:</strong> Chowdaiah Memorial Hall, Bangalore<br>
-          <strong>Time:</strong> 7:00 PM &nbsp;·&nbsp; Duration: 2h
+          <strong>Venue:</strong> Goa<br>
+          <strong>Programme:</strong> Chamber Music Showcase<br>
+          <strong>Artists:</strong> Homegrown talent & international guests
         </div>
       </div>
-      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('10 May — Rachmaninoff Piano Concerto No. 2')">Book Tickets</button></div>
+      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('BCCO Season 2019 Goa')">Learn More</button></div>
     </div>
     <!-- Card 4 -->
     <div class="concert-card">
-      <div class="concert-date"><div class="date-day">24</div><div class="date-month">May</div></div>
+      <div class="concert-date"><div class="date-day">18</div><div class="date-month">2018</div></div>
       <div class="concert-info">
-        <div class="concert-tag">Youth Gala</div>
-        <div class="concert-title">Holst: <em>The Planets Suite</em></div>
+        <div class="concert-tag">♦ Debut Season</div>
+        <div class="concert-title">BCCO Debut Season 2018 — <em>Inaugural Concert</em></div>
         <div class="concert-meta">
-          <strong>Conductor:</strong> Maestro Arjun Krishnamurthy<br>
-          <strong>Venue:</strong> National Centre for the Performing Arts<br>
-          <strong>Time:</strong> 5:00 PM & 8:00 PM
+          <strong>Venue:</strong> Bangalore, Karnataka<br>
+          <strong>Programme:</strong> Orchestral Premiere Evening<br>
+          <strong>Significance:</strong> Establishing BCCO as Bangalore's premier chamber orchestra
         </div>
       </div>
-      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('24 May — Holst: The Planets Suite')">Book Tickets</button></div>
+      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('BCCO Debut 2018')">Learn More</button></div>
     </div>
     <!-- Card 5 -->
     <div class="concert-card">
-      <div class="concert-date"><div class="date-day">14</div><div class="date-month">Jun</div></div>
+      <div class="concert-date"><div class="date-day">—</div><div class="date-month">TBA</div></div>
       <div class="concert-info">
-        <div class="concert-tag">International Guest</div>
-        <div class="concert-title">Mahler <em>Symphony No. 5</em></div>
+        <div class="concert-tag">Upcoming</div>
+        <div class="concert-title">Chamber Music <em>Evening</em></div>
         <div class="concert-meta">
-          <strong>Conductor:</strong> Guest Maestro Stefan Dohr<br>
-          <strong>Venue:</strong> National Centre for the Performing Arts<br>
-          <strong>Time:</strong> 7:30 PM &nbsp;·&nbsp; Duration: 2h 15min
+          <strong>Venue:</strong> Bangalore, Karnataka<br>
+          <strong>Programme:</strong> String & Chamber Works<br>
+          <strong>Details:</strong> Announcement coming soon
         </div>
       </div>
-      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('14 Jun — Mahler Symphony No. 5')">Book Tickets</button></div>
+      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('Upcoming Chamber Music Evening')">Register Interest</button></div>
     </div>
     <!-- Card 6 -->
     <div class="concert-card">
-      <div class="concert-date"><div class="date-day">05</div><div class="date-month">Jul</div></div>
+      <div class="concert-date"><div class="date-day">—</div><div class="date-month">TBA</div></div>
       <div class="concert-info">
-        <div class="concert-tag">Season Finale</div>
-        <div class="concert-title">Dvořák <em>New World Symphony</em></div>
+        <div class="concert-tag">Auditions</div>
+        <div class="concert-title">Musician <em>Auditions</em></div>
         <div class="concert-meta">
-          <strong>Conductor:</strong> Maestro Arjun Krishnamurthy<br>
-          <strong>Venue:</strong> Chowdaiah Memorial Hall, Bangalore<br>
-          <strong>Time:</strong> 7:00 PM &nbsp;·&nbsp; Duration: 1h 50min
+          <strong>Open to:</strong> Top musical professionals from India<br>
+          <strong>Instruments:</strong> All orchestral strings & winds<br>
+          <strong>Details:</strong> Contact us to know more
         </div>
       </div>
-      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('05 Jul — Dvořák New World Symphony')">Book Tickets</button></div>
+      <div class="concert-action"><button class="ticket-btn" onclick="selectPerformance('Audition Enquiry')">Audition</button></div>
     </div>
   </div>
   <div class="stats-row">
-    <div class="stat-item"><div class="stat-number">78</div><div class="stat-label">Years of Excellence</div></div>
-    <div class="stat-item"><div class="stat-number">120</div><div class="stat-label">Musicians</div></div>
-    <div class="stat-item"><div class="stat-number">42</div><div class="stat-label">Performances Per Season</div></div>
-    <div class="stat-item"><div class="stat-number">15K+</div><div class="stat-label">Annual Audience Members</div></div>
+    <div class="stat-item"><div class="stat-number">7+</div><div class="stat-label">Years of Excellence</div></div>
+    <div class="stat-item"><div class="stat-number">3+</div><div class="stat-label">Concert Seasons</div></div>
+    <div class="stat-item"><div class="stat-number">2</div><div class="stat-label">Cities Performed</div></div>
+    <div class="stat-item"><div class="stat-number">2018</div><div class="stat-label">Year Established</div></div>
   </div>
 </section>
 
@@ -450,70 +460,59 @@
 <section class="booking" id="booking">
   <div class="booking-inner">
     <div class="booking-left">
-      <div class="section-label">Reserve Your Seats</div>
-      <h2 class="section-title">Book a<br>Performance</h2>
-      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.95;margin-top:1.5rem;margin-bottom:3rem;">Secure your place at one of our upcoming concerts. Private boxes, group bookings, and corporate packages available upon request. Our box office team will confirm availability within 24 hours.</p>
+      <div class="section-label">Connect With Us</div>
+      <h2 class="section-title">Get in<br>Touch</h2>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.95;margin-top:1.5rem;margin-bottom:3rem;">Get in touch to know more about our performances, or if you would like to audition or simply stay connected. Our team will respond to all enquiries promptly. Follow us on social media for the latest updates.</p>
       <div class="venue-card">
         <div class="venue-diamond">♦</div>
-        <div class="venue-name">National Centre for the Performing Arts</div>
-        <div class="venue-address">Nariman Point, Mumbai — Main Concert Hall<br>Also serving Bangalore & Delhi venues</div>
+        <div class="venue-name">Philomena Thumboochetty Music Academy</div>
+        <div class="venue-address">Bangalore, Karnataka<br>Home of the Bangalore City Chamber Orchestra</div>
         <div class="venue-details">
-          <div class="venue-detail"><div class="vd-label">Capacity</div><div class="vd-value">2,400</div></div>
-          <div class="venue-detail"><div class="vd-label">Boxes</div><div class="vd-value">12</div></div>
-          <div class="venue-detail"><div class="vd-label">Parking</div><div class="vd-value">Yes</div></div>
+          <div class="venue-detail"><div class="vd-label">Founded</div><div class="vd-value">2018</div></div>
+          <div class="venue-detail"><div class="vd-label">Base</div><div class="vd-value">BLR</div></div>
+          <div class="venue-detail"><div class="vd-label">Tours</div><div class="vd-value">Yes</div></div>
         </div>
       </div>
       <div class="venue-card">
         <div class="venue-diamond">♦</div>
-        <div class="venue-name">Chowdaiah Memorial Hall</div>
-        <div class="venue-address">Vyalikaval, Bangalore — Chamber Venue</div>
+        <div class="venue-name">Follow Us on Social Media</div>
+        <div class="venue-address">Stay updated with our latest concerts, announcements, and behind-the-scenes moments from the BCCO.</div>
         <div class="venue-details">
-          <div class="venue-detail"><div class="vd-label">Capacity</div><div class="vd-value">1,200</div></div>
-          <div class="venue-detail"><div class="vd-label">Boxes</div><div class="vd-value">6</div></div>
-          <div class="venue-detail"><div class="vd-label">Parking</div><div class="vd-value">Yes</div></div>
+          <div class="venue-detail"><div class="vd-label">Instagram</div><div class="vd-value" style="font-size:0.9rem;"><a href="https://www.instagram.com/bangalorecitychamberorchestra/" target="_blank" style="color:var(--gold);text-decoration:none;">@bcco</a></div></div>
+          <div class="venue-detail"><div class="vd-label">Facebook</div><div class="vd-value" style="font-size:0.9rem;"><a href="https://www.facebook.com/bangalorecitychamberorchestra" target="_blank" style="color:var(--gold);text-decoration:none;">BCCO</a></div></div>
+          <div class="venue-detail"><div class="vd-label">YouTube</div><div class="vd-value" style="font-size:0.9rem;"><a href="https://www.youtube.com/@bangalorecitychamberorchestra" target="_blank" style="color:var(--gold);text-decoration:none;">BCCO</a></div></div>
         </div>
       </div>
     </div>
     <div class="booking-right">
       <div class="form-box">
-        <div class="form-box-title">Reservation Enquiry</div>
+        <div class="form-box-title">Contact Enquiry</div>
         <div class="form-row">
-          <div class="form-group"><label>First Name</label><input type="text" placeholder="Arjun" id="fname"></div>
-          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Sharma" id="lname"></div>
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="Your first name" id="fname"></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Your last name" id="lname"></div>
         </div>
         <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" id="email"></div>
         <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 98765 43210" id="phone"></div>
         <div class="form-group">
-          <label>Select Performance</label>
+          <label>Reason for Enquiry</label>
           <select id="perfSelect">
-            <option value="">Choose a concert</option>
-            <option>12 Apr — Beethoven's Ninth Symphony (Opening Night)</option>
-            <option>28 Apr — Brahms Double Concerto</option>
-            <option>10 May — Rachmaninoff Piano Concerto No. 2</option>
-            <option>24 May — Holst: The Planets Suite</option>
-            <option>14 Jun — Mahler Symphony No. 5</option>
-            <option>05 Jul — Dvořák New World Symphony</option>
+            <option value="">Select a topic</option>
+            <option>BCCO Season 2024</option>
+            <option>BCCO Season 2019 Bangalore</option>
+            <option>BCCO Season 2019 Goa</option>
+            <option>BCCO Debut 2018</option>
+            <option>Upcoming Chamber Music Evening</option>
+            <option>Audition Enquiry</option>
+            <option>General Information</option>
           </select>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Ticket Category</label>
-            <select>
-              <option>Premium (Stalls) — ₹3,500</option>
-              <option>Standard — ₹2,000</option>
-              <option>Circle — ₹1,500</option>
-              <option>Private Box — ₹18,000</option>
-            </select>
-          </div>
-          <div class="form-group"><label>Number of Tickets</label><input type="number" placeholder="2" min="1" max="20" id="numTickets"></div>
-        </div>
-        <div class="form-group"><label>Special Requirements</label><textarea placeholder="Accessibility needs, group bookings, corporate enquiries..."></textarea></div>
-        <button class="form-submit" onclick="submitForm()">Confirm Reservation</button>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your enquiry — performances, auditions, or just staying in touch..."></textarea></div>
+        <button class="form-submit" onclick="submitForm()">Send Message</button>
         <div class="success-msg" id="successMsg">
-          <p>✦ Your reservation has been received</p>
-          <small>Our box office team will contact you within 24 hours to confirm availability and process payment.</small>
+          <p>✦ Your message has been received</p>
+          <small>Our team will get back to you shortly. Thank you for your interest in the BCCO.</small>
         </div>
-        <p class="form-note">Our team will confirm availability within 24 hours.<br>Secure payment processed upon confirmation.</p>
+        <p class="form-note">We respond to all enquiries promptly.<br>You can also reach us on Instagram and Facebook.</p>
       </div>
     </div>
   </div>
@@ -524,26 +523,26 @@
   <div class="about-inner">
     <div class="about-left">
       <div class="section-label">Our Heritage</div>
-      <h2 class="section-title">A Legacy of<br>Musical Excellence</h2>
-      <div class="about-quote" style="margin-top:2rem;">"Music is the shorthand of emotion — and we dedicate our craft to expressing what words cannot."</div>
-      <p class="about-text">Founded in 1947, the Philharmonia Orchestra has been at the forefront of India's classical music landscape for nearly eight decades. From our earliest performances at Kolkata's Grand Hall to our residency at the National Centre for the Performing Arts, we have remained committed to presenting the world's great orchestral repertoire with uncompromising artistic excellence.<br><br>Our 120 musicians — drawn from India and across the globe — form an ensemble of rare distinction, under the direction of Music Director Maestro Arjun Krishnamurthy.</p>
+      <h2 class="section-title">Our Musical<br>Journey</h2>
+      <div class="about-quote" style="margin-top:2rem;">"Discover the enchanting world of string instruments — where music comes alive and passion resonates."</div>
+      <p class="about-text">Welcome to the Bangalore City Chamber Orchestra (BCCO)! Since our debut in May 2018, we have established ourselves as a premier orchestra known for delivering exceptional music and elegant performances. At BCCO, we are committed to engaging top musical professionals from India and promoting music performance as a viable career choice.<br><br>Join us as we present a diverse array of stunning productions featuring both homegrown talent and esteemed international artists. The BCCO is now managed and is nestled in the Philomena Thumboochetty Music Academy — created to honour the legacy of the highly accomplished violinist from Bangalore, the late Smt. Philomena Thumboochetty.</p>
     </div>
     <div class="about-right">
       <div class="pillar">
         <div class="pillar-title">♦ Artistic Excellence</div>
-        <div class="pillar-text">We hold ourselves to the highest international standards, performing the full breadth of the orchestral canon with passion, precision, and profound musical insight.</div>
+        <div class="pillar-text">We strive to elevate classical music by connecting with our supporters and delivering exceptional performances that resonate with every audience member.</div>
       </div>
       <div class="pillar">
-        <div class="pillar-title">♦ Community & Access</div>
-        <div class="pillar-text">Through subsidised tickets, youth programmes, and free community concerts, we believe world-class orchestral music belongs to everyone.</div>
+        <div class="pillar-title">♦ Education & Legacy</div>
+        <div class="pillar-text">The PTMA was created to honour Smt. Philomena Thumboochetty, sharing BCCO's vision of making Bangalore the epicentre for preserving and enriching orchestral music.</div>
       </div>
       <div class="pillar">
-        <div class="pillar-title">♦ Musical Education</div>
-        <div class="pillar-text">Our academy nurtures the next generation of Indian orchestral musicians through masterclasses, youth orchestras, and scholarship programmes.</div>
+        <div class="pillar-title">♦ Community</div>
+        <div class="pillar-text">Our goal is to enrich the community with the richness and grandeur of Western classical music, while championing music performance as a viable career for Indian musicians.</div>
       </div>
       <div class="pillar">
-        <div class="pillar-title">♦ Indian Premieres</div>
-        <div class="pillar-text">We champion new works by Indian composers and regularly programme Indian premieres of major international compositions.</div>
+        <div class="pillar-title">♦ International Reach</div>
+        <div class="pillar-text">We bring together homegrown talent and esteemed international artists, fostering a global dialogue around chamber and orchestral music rooted in Bangalore.</div>
       </div>
     </div>
   </div>
@@ -552,38 +551,62 @@
 <!-- ENSEMBLE -->
 <section class="ensemble" id="ensemble">
   <div class="section-label">Meet the Artists</div>
-  <h2 class="section-title">Principal Musicians</h2>
+  <h2 class="section-title">Our Ensemble</h2>
   <div class="ensemble-grid">
-    <div class="member-card"><div class="member-avatar">AK</div><div class="member-name">Arjun Krishnamurthy</div><div class="member-role">Music Director</div><div class="member-instrument">Principal Conductor</div></div>
-    <div class="member-card"><div class="member-avatar">PM</div><div class="member-name">Priya Menon</div><div class="member-role">Concertmaster</div><div class="member-instrument">Violin</div></div>
-    <div class="member-card"><div class="member-avatar">RD</div><div class="member-name">Rohan Das</div><div class="member-role">Principal</div><div class="member-instrument">Cello</div></div>
-    <div class="member-card"><div class="member-avatar">SN</div><div class="member-name">Sunita Nair</div><div class="member-role">Principal</div><div class="member-instrument">Oboe</div></div>
-    <div class="member-card"><div class="member-avatar">VK</div><div class="member-name">Vikram Kaul</div><div class="member-role">Principal</div><div class="member-instrument">French Horn</div></div>
-    <div class="member-card"><div class="member-avatar">AA</div><div class="member-name">Ananya Agarwal</div><div class="member-role">Principal</div><div class="member-instrument">Flute</div></div>
-    <div class="member-card"><div class="member-avatar">MR</div><div class="member-name">Mihail Rusu</div><div class="member-role">Principal</div><div class="member-instrument">Trumpet</div></div>
-    <div class="member-card"><div class="member-avatar">LK</div><div class="member-name">Laleh Khalili</div><div class="member-role">Principal</div><div class="member-instrument">Harp</div></div>
+    <div class="member-card"><div class="member-avatar">PT</div><div class="member-name">Smt. Philomena Thumboochetty</div><div class="member-role">In Memoriam · Inspiration</div><div class="member-instrument">Violin — Legacy Honouree</div></div>
+    <div class="member-card"><div class="member-avatar">VN</div><div class="member-name">First Violins</div><div class="member-role">Principal Section</div><div class="member-instrument">Violin</div></div>
+    <div class="member-card"><div class="member-avatar">VA</div><div class="member-name">Second Violins</div><div class="member-role">Section</div><div class="member-instrument">Violin</div></div>
+    <div class="member-card"><div class="member-avatar">VL</div><div class="member-name">Violas</div><div class="member-role">Section</div><div class="member-instrument">Viola</div></div>
+    <div class="member-card"><div class="member-avatar">VC</div><div class="member-name">Cellos</div><div class="member-role">Section</div><div class="member-instrument">Cello</div></div>
+    <div class="member-card"><div class="member-avatar">DB</div><div class="member-name">Double Basses</div><div class="member-role">Section</div><div class="member-instrument">Double Bass</div></div>
+    <div class="member-card"><div class="member-avatar">WW</div><div class="member-name">Wind Players</div><div class="member-role">Section</div><div class="member-instrument">Woodwind & Brass</div></div>
+    <div class="member-card"><div class="member-avatar">GU</div><div class="member-name">Guest Artists</div><div class="member-role">International & National</div><div class="member-instrument">Various Instruments</div></div>
   </div>
 </section>
 
-<!-- EDUCATION -->
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-label">Audience Voices</div>
+  <h2 class="section-title">What Our Audience<br>Say</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-quote">Attending BCCO's concerts is always a delight. The passion and precision of the musicians create an enchanting atmosphere that resonates long after the performance.</div>
+      <div class="testimonial-author">Aaron</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">As a classical music lover, I can attest to the exceptional quality of BCCO's concerts. Their passion for music shines through in every note, leaving the audience captivated.</div>
+      <div class="testimonial-author">Rajathi</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">BCCO's dedication to perfection is truly commendable. Every performance is a testament to their commitment to musical excellence and artistic brilliance.</div>
+      <div class="testimonial-author">Syanna</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">The concert was absolutely mesmerising! It was a magical evening filled with exquisite melodies and pure joy. BCCO's performance was beyond words.</div>
+      <div class="testimonial-author">Miriam</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION / PTMA -->
 <section class="education" id="education">
-  <div class="section-label">Learning & Outreach</div>
-  <h2 class="section-title">Music Education<br>& Academy</h2>
+  <div class="section-label">Mission & Academy</div>
+  <h2 class="section-title">Philomena Thumboochetty<br>Music Academy</h2>
   <div class="education-grid">
     <div class="edu-card">
       <div class="edu-icon">♩</div>
-      <div class="edu-title">Youth Orchestra</div>
-      <div class="edu-text">Our flagship youth programme for musicians aged 12–22. Full orchestral training, sectionals, and public performances under professional conductors. Auditions held annually each September.</div>
+      <div class="edu-title">Our Mission</div>
+      <div class="edu-text">Our mission at BCCO is to enrich lives through the power of music. We aim to inspire, educate, and uplift individuals by providing soul-stirring performances that resonate with the heart and mind.</div>
     </div>
     <div class="edu-card">
       <div class="edu-icon">♪</div>
-      <div class="edu-title">Masterclasses</div>
-      <div class="edu-text">Intensive masterclasses led by our principal musicians and distinguished international soloists. Open to advanced students and emerging professionals across all orchestral instruments.</div>
+      <div class="edu-title">Honouring a Legacy</div>
+      <div class="edu-text">The Philomena Thumboochetty Music Academy was created to honour the legacy of the highly accomplished violinist from Bangalore, the late Smt. Philomena Thumboochetty — preserving her contribution to Indian classical music.</div>
     </div>
     <div class="edu-card">
       <div class="edu-icon">♫</div>
-      <div class="edu-title">School Concerts</div>
-      <div class="edu-text">Specially designed educational concerts bringing live orchestral music to schools across Karnataka and Maharashtra. Curriculum-linked programmes for students aged 6–18.</div>
+      <div class="edu-title">Career in Music</div>
+      <div class="edu-text">At BCCO, we are committed to promoting music performance as a viable career choice for Indian musicians, engaging top musical professionals and providing a platform for homegrown talent to shine alongside international artists.</div>
     </div>
   </div>
 </section>
@@ -592,46 +615,46 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo">Philharmonia Orchestra</div>
-      <p>Bringing the world's greatest symphonic music to audiences across India. An institution of cultural excellence since 1947.</p>
+      <div class="footer-logo">Bangalore City Chamber Orchestra</div>
+      <p>Bringing the enchanting world of string and chamber music to life in Bangalore. A premier orchestra established in 2018, nestled in the Philomena Thumboochetty Music Academy.</p>
       <div class="social-links">
-        <a class="social-link" href="#" title="Facebook">f</a>
-        <a class="social-link" href="#" title="Instagram">in</a>
-        <a class="social-link" href="#" title="YouTube">▶</a>
-        <a class="social-link" href="#" title="Spotify">♪</a>
+        <a class="social-link" href="https://www.facebook.com/bangalorecitychamberorchestra" target="_blank" title="Facebook">f</a>
+        <a class="social-link" href="https://www.instagram.com/bangalorecitychamberorchestra/" target="_blank" title="Instagram">in</a>
+        <a class="social-link" href="https://www.youtube.com/channel/UCOxGYWJSvjXvtAvb3m5gY5A" target="_blank" title="YouTube">▶</a>
+        <a class="social-link" href="https://www.thebcco.com/" target="_blank" title="Website">♪</a>
       </div>
     </div>
     <div class="footer-col">
-      <h4>Performances</h4>
-      <a href="#concerts">2025–26 Season</a>
-      <a href="#concerts">Symphonic Series</a>
-      <a href="#concerts">Chamber Music</a>
-      <a href="#concerts">Youth Concerts</a>
-      <a href="#concerts">Special Events</a>
+      <h4>Seasons</h4>
+      <a href="#concerts">Season 2024 (PTMA)</a>
+      <a href="#concerts">Season 2019 — Bangalore</a>
+      <a href="#concerts">Season 2019 — Goa</a>
+      <a href="#concerts">Debut Season 2018</a>
+      <a href="#concerts">Upcoming Concerts</a>
     </div>
     <div class="footer-col">
       <h4>The Orchestra</h4>
-      <a href="#about">About Us</a>
+      <a href="#about">About BCCO</a>
       <a href="#ensemble">Our Musicians</a>
-      <a href="#about">Music Director</a>
-      <a href="#education">Education</a>
-      <a href="#">Press & Media</a>
+      <a href="#education">PTMA Academy</a>
+      <a href="#booking">Auditions</a>
+      <a href="https://www.thebcco.com/" target="_blank">Official Website</a>
     </div>
     <div class="footer-col">
-      <h4>Contact</h4>
-      <a href="#booking">Box Office</a>
-      <a href="#booking">Group Bookings</a>
-      <a href="#booking">Corporate Packages</a>
-      <a href="#">Donate</a>
-      <a href="#">Careers</a>
+      <h4>Connect</h4>
+      <a href="#booking">Contact Us</a>
+      <a href="https://www.instagram.com/bangalorecitychamberorchestra/" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/bangalorecitychamberorchestra" target="_blank">Facebook</a>
+      <a href="https://www.youtube.com/channel/UCOxGYWJSvjXvtAvb3m5gY5A" target="_blank">YouTube</a>
+      <a href="#booking">Enquire</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 Philharmonia Orchestra. All rights reserved.</span>
+    <span>© 2025 Bangalore City Chamber Orchestra (BCCO). All rights reserved.</span>
     <div class="footer-contact">
-      Box Office: <a href="tel:+918045678900">+91 80 4567 8900</a>
+      <a href="https://www.instagram.com/bangalorecitychamberorchestra/" target="_blank">@bangalorecitychamberorchestra</a>
       <span class="ornament">·</span>
-      <a href="mailto:bookings@philharmonia.in">bookings@philharmonia.in</a>
+      <a href="https://www.thebcco.com/" target="_blank">www.thebcco.com</a>
     </div>
   </div>
 </footer>
@@ -666,12 +689,12 @@
     const email = document.getElementById('email').value.trim();
     const perf = document.getElementById('perfSelect').value;
     if (!fname || !email || !perf) {
-      alert('Please fill in your name, email, and select a performance.');
+      alert('Please fill in your name, email, and select a topic.');
       return;
     }
     document.getElementById('successMsg').style.display = 'block';
     document.querySelector('.form-submit').disabled = true;
-    document.querySelector('.form-submit').textContent = 'Reservation Received';
+    document.querySelector('.form-submit').textContent = 'Message Sent';
     document.querySelector('.form-submit').style.background = 'rgba(201,168,76,0.3)';
     document.querySelector('.form-submit').style.color = 'var(--gold)';
     document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -687,7 +710,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.concert-card, .member-card, .pillar, .edu-card, .stat-item, .venue-card').forEach(el => {
+  document.querySelectorAll('.concert-card, .member-card, .pillar, .edu-card, .stat-item, .venue-card, .testimonial-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
