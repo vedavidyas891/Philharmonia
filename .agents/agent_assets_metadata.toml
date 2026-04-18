@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "RYeMFvtWPqHINm6VilQwn"
+uri = "file://bcco-website.zip"
+type = "unspecified"
+title = "BCCO Website (index.html)"
