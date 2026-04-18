@@ -214,29 +214,31 @@
   .member-instrument { font-size: 0.75rem; color: var(--gold); opacity: 0.7; font-style: italic; font-family: 'Cormorant Garamond', serif; }
 
   /* SEASONS GALLERY */
-  .seasons-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(201,168,76,0.08); margin-bottom: 1px; }
+  .seasons-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; background: rgba(201,168,76,0.15); margin-bottom: 3px; }
   .season-img-card {
     position: relative; overflow: hidden; cursor: pointer;
-    aspect-ratio: 16/10; display: flex; flex-direction: column; justify-content: flex-end;
+    aspect-ratio: 4/3; display: flex; flex-direction: column; justify-content: flex-end;
+    background: #111;
   }
   .season-img-card img {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
-    transition: transform 0.6s ease; filter: brightness(0.55) saturate(0.7);
+    object-fit: cover; object-position: center center;
+    transition: transform 0.7s ease, filter 0.4s ease;
+    filter: brightness(0.92);
+    transform: scale(1.55);
   }
-  .season-img-card:hover img { transform: scale(1.04); filter: brightness(0.45) saturate(0.6); }
+  .season-img-card:hover img { transform: scale(1.62); filter: brightness(1.05); }
   .season-img-card::after {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.3) 50%, transparent 100%);
+    background: linear-gradient(to top, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.15) 40%, transparent 65%);
     z-index: 1;
   }
   .season-img-overlay {
-    position: relative; z-index: 2; padding: 1.75rem 2rem;
-    border-top: 1px solid rgba(201,168,76,0.2);
+    position: relative; z-index: 2; padding: 1.4rem 1.6rem;
   }
-  .season-img-year { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
-  .season-img-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; line-height: 1.3; color: var(--cream); }
-  .season-img-tag { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.4rem; }
+  .season-img-year { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .season-img-title { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 400; line-height: 1.2; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+  .season-img-tag { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,232,0.65); margin-top: 0.3rem; }
 
   /* TESTIMONIALS */
   .testimonials { background: var(--mid); }
@@ -390,7 +392,7 @@
   <!-- SEASONS PHOTO GALLERY -->
   <div class="seasons-gallery">
     <div class="season-img-card" onclick="selectPerformance('BCCO Debut 2018')">
-      <img src="https://static.wixstatic.com/media/fb10bc_0d61adeddc184447a9cd47b79a3f0f85f000.jpg/v1/fill/w_640,h_360,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb10bc_0d61adeddc184447a9cd47b79a3f0f85f000.jpg" alt="BCCO Debut Season 2018" loading="lazy">
+      <img src="https://static.wixstatic.com/media/fb10bc_0d61adeddc184447a9cd47b79a3f0f85f000.jpg/v1/fill/w_1280,h_720,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb10bc_0d61adeddc184447a9cd47b79a3f0f85f000.jpg" alt="BCCO Debut Season 2018" loading="lazy" style="object-position: 55% 30%;">
       <div class="season-img-overlay">
         <div class="season-img-year">♦ 2018</div>
         <div class="season-img-title">Debut Season</div>
@@ -398,7 +400,7 @@
       </div>
     </div>
     <div class="season-img-card" onclick="selectPerformance('BCCO Season 2019 Bangalore')">
-      <img src="https://static.wixstatic.com/media/fb10bc_962e910a2106411ba842919138ad5435f000.jpg/v1/fill/w_640,h_360,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb10bc_962e910a2106411ba842919138ad5435f000.jpg" alt="BCCO Season 2019 Bangalore & Goa" loading="lazy">
+      <img src="https://static.wixstatic.com/media/fb10bc_962e910a2106411ba842919138ad5435f000.jpg/v1/fill/w_1280,h_720,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb10bc_962e910a2106411ba842919138ad5435f000.jpg" alt="BCCO Season 2019 Bangalore & Goa" loading="lazy" style="object-position: center 45%;">
       <div class="season-img-overlay">
         <div class="season-img-year">♦ 2019</div>
         <div class="season-img-title">Season 2019</div>
@@ -406,7 +408,7 @@
       </div>
     </div>
     <div class="season-img-card" onclick="selectPerformance('BCCO Season 2024')">
-      <img src="https://static.wixstatic.com/media/fb10bc_e5c28cd698f44c0684ee8caa7edb0547f000.jpg/v1/fill/w_640,h_360,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/fb10bc_e5c28cd698f44c0684ee8caa7edb0547f000.jpg" alt="BCCO Season 2024 presented by PTMA" loading="lazy">
+      <img src="https://static.wixstatic.com/media/fb10bc_a95eb7082e184b5f8ada27f363313812f000.jpg/v1/fill/w_1905,h_530,al_c,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/fb10bc_a95eb7082e184b5f8ada27f363313812f000.jpg" alt="BCCO Season 2024 presented by PTMA" loading="lazy" style="object-position: 70% 45%; transform-origin: 70% 45%;">
       <div class="season-img-overlay">
         <div class="season-img-year">♦ 2024</div>
         <div class="season-img-title">Season 2024</div>
